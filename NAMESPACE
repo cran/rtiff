@@ -1,0 +1,10 @@
+
+export(
+readTiff,
+autoThreshold,
+newPixmapRGB,
+plot.matrix)
+
+S3method(plot, matrix)
+
+
