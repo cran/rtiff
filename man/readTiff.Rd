@@ -5,7 +5,7 @@
   Loads a TIFF image from a file and returns the image as a pixmap object, with optional scaling.
 }
 \usage{
-readTiff(fn, page = 1, reduce = 0)
+readTiff(fn, page = 0, reduce = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

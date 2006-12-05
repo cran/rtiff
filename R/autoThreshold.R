@@ -7,6 +7,5 @@ function(d.m, est=0.5) {
     t2 <- mean(d.m[d.m > est], na.rm=TRUE)
     est <- mean(c(t1, t2), na.rm=TRUE)
   }
-  return(c(t1, est, mean(c(t1, est)), mean(c(t2,est)), t2, ))
+  return(c(t1, mean(c(t1, est)), est, mean(c(t2,est)), t2))
 }
-

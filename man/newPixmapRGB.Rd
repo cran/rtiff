@@ -1,6 +1,5 @@
 \name{newPixmapRGB}
 \alias{newPixmapRGB}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Create an RGB pixmap }
 \description{
   A utility function to create an RGB pixmap object out of 3 rasters.

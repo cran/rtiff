@@ -1,5 +1,9 @@
 #include <math.h>
 #include <tiffio.h>
+#include <R.h>
+#include <Rdefines.h>
+#include <Rinternals.h>
+
 /*============================================================================ 
  * tiffRead --
  *
@@ -116,6 +120,60 @@ void TiffReadTIFFRGBA (char** fileName, int* dir, int* r, int* g, int* b) {
   }
   TIFFClose(tif);
   _TIFFfree(buf);
+  return;
+}
+
+void writeTiff(SEXP mr, SEXP mg, SEXP mb, SEXP fn)
+{
+  TIFF *output;
+  char *raster;
+  int x, y;
+  int h = INTEGER(GET_DIM(mr))[0];
+  int w = INTEGER(GET_DIM(mr))[1];
+  double *r = REAL(mr);
+  double *g = REAL(mg);
+  double *b = REAL(mb);
+  char* fileName = CHAR(STRING_ELT(fn, 0)) ;
+
+  // Open the output image
+  if((output = TIFFOpen(fileName, "w")) == NULL){
+    fprintf(stderr, "Could not open outgoing image\n");
+    exit(42);
+  }
+
+  if((raster = (char*) malloc(sizeof(char*) * w * h * 3)) == NULL){
+    fprintf(stderr, "Could not allocate enough memory\n");
+    exit(42);
+  }
+
+  for (x=0; x<w; x++)
+  {
+    for (y=0; y<h; y++)
+    {
+      int index = 3 * (y * w + x);
+      raster[index] = (char)(255.0 * r[y + x*h]);
+      raster[index + 1] = (char)(255.0 * g[y + x*h]);
+      raster[index + 2] = (char)(255.0 * b[y + x*h]);
+    }
+  }
+
+  // Write the tiff tags to the file
+  TIFFSetField(output, TIFFTAG_IMAGEWIDTH, w);
+  TIFFSetField(output, TIFFTAG_IMAGELENGTH, h);
+  TIFFSetField(output, TIFFTAG_COMPRESSION, 1);
+  TIFFSetField(output, TIFFTAG_PLANARCONFIG, PLANARCONFIG_CONTIG);
+  TIFFSetField(output, TIFFTAG_PHOTOMETRIC, PHOTOMETRIC_RGB);
+  TIFFSetField(output, TIFFTAG_BITSPERSAMPLE, 8);
+  TIFFSetField(output, TIFFTAG_SAMPLESPERPIXEL, 3);
+
+  // Actually write the image
+  if(TIFFWriteEncodedStrip(output, 0, raster, w * h * 3) == 0){
+    fprintf(stderr, "Could not write image\n");
+    exit(42);
+  }
+
+  TIFFClose(output);
+  free(raster);
   return;
 }
 

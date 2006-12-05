@@ -1,5 +1,5 @@
 "readTiff" <-
-function(fn, page=1, reduce=0) {
+function(fn, page=0, reduce=0) {
   w <- integer(1)
   h <- integer(1)
 
@@ -46,9 +46,6 @@ function(fn, page=1, reduce=0) {
       rm(b)
       gc()
 
-      pmap$rmax <- rmx
-      pmap$gmax <- gmx
-      pmap$bmax <- bmx
       return(pmap)
     } else {
     cat("Could not open", fn, ".  File corrupted or missing.\n")

@@ -2,7 +2,8 @@
 \alias{autoThreshold}
 \title{ Suggests threshold levels to use in binarizing an image channel. }
 \description{
-  This is an implementation of the Ridler method for binarization (see references).
+  This is an implementation of the Ridler method for binarization (see references).  NOTE: The order of the values returned did
+  not match what is described in the "value" section below.  This is fixed in this version.
 }
 \usage{
 autoThreshold(d.m, est = 0.5)
@@ -15,7 +16,7 @@ autoThreshold(d.m, est = 0.5)
 }
 \value{
   A vector (v) of estimates, the 3rd element of which is the true Ridler estimate.  However, experience demonstrates
-  that sometimes a lower (elements 1 or 2) or higher (elements 4 or 4) estimate performs better for a given application.
+  that sometimes a lower (elements 1 or 2) or higher (elements 4 or 5) estimate performs better for a given application.
   The Ridler estimate is the mean between the average intensity of bright regions in the raster and the average intensity
   of dim regions.  This is v[3].  v[1] is the average of dim regions, v[5] is the average of dim regions, and v[2] and v[4]
   are the mean between the Ridler estimate and v[1] and v[2], respectively.  

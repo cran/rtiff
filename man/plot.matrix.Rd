@@ -2,8 +2,8 @@
 \alias{plot.matrix}
 \title{ Overload the plot function for matrices }
 \description{
-  This is a simple overloader for the plot function which takes a matrix,
-  converts it to and RGB pixmap (by replicating it 3 times, once for each
+  This is a simple S3 method for the plot function which takes a matrix,
+  converts it to an RGB pixmap (by replicating it 3 times, once for each
   channel), and then plotting the resulting image.
 }
 \usage{
@@ -23,7 +23,6 @@ plot.matrix(x, ...)
 library(rtiff)
 tif <- readTiff(paste(.path.package("rtiff"), "/tiff/jello.tif", sep=""))
 
-#note the overload...specifying plot.matrix is not necessary.
 plot(tif@red) 
 
 }
