@@ -30,7 +30,7 @@ tif <- readTiff(paste(.path.package("rtiff"), "/tiff/jello.tif", sep=""))
 threshold <- autoThreshold(tif@red)
 plot(tif)
 
-get(getOption("device"))()
+getOption("device")()
 
 plot(tif@red > threshold[3])
 }

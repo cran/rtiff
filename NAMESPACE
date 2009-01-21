@@ -4,6 +4,8 @@ readTiff,
 writeTiff,
 autoThreshold,
 newPixmapRGB,
+updateDescription,
+getDescription,
 plot.matrix)
 
 S3method(plot, matrix)

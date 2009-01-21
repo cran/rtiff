@@ -40,7 +40,7 @@ Maintainer: Eric Kort <eric.kort@vai.org>
 \references{
   www.libtiff.org
 }
-}
+
 \examples{
 library(rtiff)
 tif <- readTiff(paste(.path.package("rtiff"), "/tiff/jello.tif", sep=""))

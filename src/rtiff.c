@@ -1,5 +1,5 @@
 #include <math.h>
-#include <tiffio.h>
+#include "tiffio.h"
 #include <R.h>
 #include <Rdefines.h>
 #include <Rinternals.h>
@@ -90,6 +90,8 @@ void TiffReadTIFFRGBA (char** fileName, int* dir, int* r, int* g, int* b) {
   uint32 *buf;
   TIFF* tif;
 
+  uint16  count;
+  char *data;
 
   if((tif = TIFFOpen(*fileName, "r")) == NULL) {
     return;
@@ -123,6 +125,26 @@ void TiffReadTIFFRGBA (char** fileName, int* dir, int* r, int* g, int* b) {
   return;
 }
 
+SEXP getTiffDescription(SEXP fn) {
+  char* fileName; 
+  TIFF *tiff;
+  char* data;
+  SEXP ans;
+  fileName = (char*)CHAR(STRING_ELT(fn, 0)) ;
+  if((tiff = TIFFOpen(fileName, "r")) == NULL){
+    fprintf(stderr, "Could not open image file\n");
+    return;
+  }
+
+  TIFFGetField(tiff, 270, &data);
+  TIFFClose(tiff);  
+
+  PROTECT(ans=NEW_CHARACTER(1));
+  SET_STRING_ELT(ans, 0, mkChar(data));
+  UNPROTECT(1);
+  return(ans);
+}
+
 void writeTiff(SEXP mr, SEXP mg, SEXP mb, SEXP fn)
 {
   TIFF *output;
@@ -133,7 +155,8 @@ void writeTiff(SEXP mr, SEXP mg, SEXP mb, SEXP fn)
   double *r = REAL(mr);
   double *g = REAL(mg);
   double *b = REAL(mb);
-  char* fileName = CHAR(STRING_ELT(fn, 0)) ;
+  char* fileName;
+  fileName  = (char*)CHAR(STRING_ELT(fn, 0));
 
   // Open the output image
   if((output = TIFFOpen(fileName, "w")) == NULL){
@@ -189,3 +212,37 @@ void reduce(int* r, int* nr, int* w, int* h, double* p)
     }
   }
 }
+
+
+void updateTTag (SEXP fn, SEXP desc)
+{
+    TIFF *tiff;
+    char* fileName;
+    char* description;
+    // Open the image
+    fileName = (char*)CHAR(STRING_ELT(fn, 0)) ;
+    description = (char*)CHAR(STRING_ELT(desc, 0)) ;
+	
+    if((tiff = TIFFOpen(fileName, "r+")) == NULL){
+      fprintf(stderr, "Could not open outgoing image\n");
+      exit(42);
+    }
+
+    const TIFFFieldInfo *fip;
+    fip = TIFFFieldWithTag(tiff, 270);
+    if (!fip) {
+      fprintf(stderr, "Could not get field information\n");
+      exit(42);
+    }
+    if (fip->field_type == TIFF_ASCII) {
+        if (TIFFSetField(tiff, fip->field_tag, description) != 1)
+            fprintf( stderr, "Failed to set field.");
+    } else {
+      fprintf(stderr, "Description field is not ascii\n");
+      exit(42);
+    }            
+    TIFFRewriteDirectory(tiff);
+    TIFFClose(tiff);
+    return;
+}
+

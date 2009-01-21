@@ -27,7 +27,7 @@ plot(myPixmap)
 
 #let's scramble the color channels just for fun
 
-get(getOption("device"))()
+getOption("device")()
 myPixmap <- newPixmapRGB(tif@blue, tif@red, tif@green)
 plot(myPixmap)
 
