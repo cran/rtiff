@@ -1,4 +1,4 @@
-e8664ccf53ced5180654fb91e1be7d97 *DESCRIPTION
+066491fe66891b439bfd161011a77d7a *DESCRIPTION
 99cf42fffc53d0dbfefd8bc8f8728ea8 *LICENSE
 a2f48e7f2b2bfee57e5d65ace0bf8c32 *NAMESPACE
 9f3549f70c8df34ba0ec2893ca1215ca *R/autoThreshold.R
@@ -8,8 +8,8 @@ a71bae4710db7b0380a0f55522156843 *R/plot.matrix.R
 bb135cf6a30baec48f2c1e150631a12d *R/readTiff.R
 8eadfda230b2013922cc9abeadd79c8c *R/updateDescription.R
 7c4d0d58d0736e2851315b326f0ff8eb *R/writeTiff.R
-465d57694acbeee1225885d40049ecc9 *configure
-bce1bd359c045e19e938e05c1d17609e *configure.in
+1dcc65e2dd0e2891883d024d09cadd03 *configure
+2d08b55b848f9eea39b70bf2a1b37188 *configure.in
 8e1eb8f6aa9c72998ff995e860943922 *inst/tiff/jello.tif
 f0d7bcb90496c323c880a9773dfe93ff *inst/tiff/quad-jpeg.tif
 3fa7bd7cf706309489ab8e0425eb49aa *inst/tiff/t1.tif
@@ -21,7 +21,7 @@ b33326eedd1914f2a92bbbc31d954596 *man/autoThreshold.Rd
 a9929e74a735ef0b5e0679e609211383 *man/rtiff.package.Rd
 e2a8fbb665253da2e778c7e64cb8d340 *man/updateDescription.Rd
 e82e788210b4c0e06e98e83ffd530aae *man/writeTiff.Rd
-29bcb3becaa8ef7e9be1743a623b829e *src/Makevars
+82e30c795657033c9071295d05694ad7 *src/Makevars
 226cb8d694b6dd8fafeb3d5c3fc616fc *src/Makevars.in
 5be412c81811c1db36131b5255f4729e *src/Makevars.win
-5aa433b68a6371850b63ea32806b7c0e *src/rtiff.c
+e3ed5f65750cf91db71cf3bff5e083ff *src/rtiff.c

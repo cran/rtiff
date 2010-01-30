@@ -112,7 +112,7 @@ void TiffReadTIFFRGBA (char** filename, int* dir, int* r, int* g, int* b)
 		g[i] = (int)TIFFGetG(buf[i]);
 		b[i] = (int)TIFFGetB(buf[i]);
 	    }                
-	    fflush(stdout); /* what is this for? */
+//	    fflush(stdout); /* what is this for? */
 	}
     } else
 	error("Error allocating memory in TIFFmalloc");  
@@ -200,14 +200,15 @@ void reduce(int* r, int* nr, int* w, int* h, double* p)
 
 void updateTTag (SEXP fn, SEXP desc)
 {
+#if TIFF_VERSION_CLASSIC >= 40
+    error("Interface changed in libtiff 4, so no longer implemented");
+#else
     TIFF *tiff;
-    const TIFFFieldInfo *fip;
     const char* filename = CHAR(STRING_ELT(fn, 0)) ;
-    const char* description = CHAR(STRING_ELT(desc, 0)) ;
-	
+    const char* description = CHAR(STRING_ELT(desc, 0)) ;	
     if((tiff = TIFFOpen(filename , "r+")) == NULL)
 	error("Could not open image file '%s'", filename);
-
+    const TIFFFieldInfo *fip;
     fip = TIFFFieldWithTag(tiff, 270);
     if (!fip) error("Could not get field information");
     if (fip->field_type == TIFF_ASCII) {
@@ -216,5 +217,6 @@ void updateTTag (SEXP fn, SEXP desc)
     } else error("Description field is not ascii");
     TIFFRewriteDirectory(tiff);
     TIFFClose(tiff);
+#endif
 }
 
