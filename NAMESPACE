@@ -1,5 +1,7 @@
 useDynLib("rtiff")
 
+import(pixmap)
+
 export(
 readTiff,
 writeTiff,
