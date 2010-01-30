@@ -11,14 +11,15 @@ getDescription(fn)
   \item{fn}{ The name of the tiff file. }
 }
 \value{
-  A string with the description field from the TIFF file.
+  A string with the description field from the TIFF file, or \code{NA}
+  if there is no such field.
 }
 \author{ Eric Kort <eric.kort@vai.org> }
 \examples{
-
-library(rtiff)
-tif <- readTiff(paste(.path.package("rtiff"), "/tiff/jello.tif", sep=""))
-getDescription(paste(.path.package("rtiff"), "/tiff/jello.tif", sep=""))
+# This has no description
+getDescription(system.file("tiff", "jello.tif", package="rtiff"))
+# but this has
+getDescription(system.file("tiff", "t1.tif", package="rtiff"))
 }
 \keyword{ utilities }
 \keyword{ IO }

@@ -28,12 +28,8 @@ TIFFWriteEncodedStrip, with the entire raster in a single strip (for simplicity)
 
 
 \examples{
-
-library(rtiff)
-tif <- readTiff(paste(.path.package("rtiff"), "/tiff/jello.tif", sep=""))
+tif <- readTiff(system.file("tiff", "jello.tif", package="rtiff"))
 writeTiff(tif@red, "atesttif.tif")
-
-
 }
 
 \keyword{ utilities }

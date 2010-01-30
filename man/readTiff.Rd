@@ -45,12 +45,8 @@ accordingly.
 
 
 \examples{
-
-library(rtiff)
-tif <- readTiff(paste(.path.package("rtiff"), "/tiff/jello.tif", sep=""))
+tif <- readTiff(system.file("tiff", "jello.tif", package="rtiff"))
 plot(tif)
-
-
 }
 
 \keyword{ utilities }

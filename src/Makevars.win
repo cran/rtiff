@@ -1,0 +1,2 @@
+PKG_CPPFLAGS = -I$(LIB_TIFF)/include
+PKG_LIBS = -L$(LIB_TIFF)/lib -ltiff -ljpeg -lz

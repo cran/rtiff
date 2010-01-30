@@ -7,7 +7,7 @@
   channel), and then plotting the resulting image.
 }
 \usage{
-plot.matrix(x, ...)
+\S3method{plot}{matrix}(x, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,11 +19,7 @@ plot.matrix(x, ...)
 }
 \author{ Eric Kort <eric.kort@vai.org> }
 \examples{
-
-library(rtiff)
-tif <- readTiff(paste(.path.package("rtiff"), "/tiff/jello.tif", sep=""))
-
+tif <- readTiff(system.file("tiff", "jello.tif", package="rtiff"))
 plot(tif@red) 
-
 }
 \keyword{ utilities }

@@ -15,8 +15,6 @@ updateDescription(fn, description)
 None.
 }
 \author{ Eric Kort <eric.kort@vai.org> }
-\examples{
-}
 \keyword{ utilities }
 \keyword{ IO }
 \keyword{ file }

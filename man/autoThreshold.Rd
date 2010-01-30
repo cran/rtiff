@@ -24,14 +24,9 @@ autoThreshold(d.m, est = 0.5)
 \references{ Ridler T, Calvard S. Picture thresholding using an iterative selection method. IEEE Trans on Systems Man and Cybernetics, SMC 8;630-2. }
 \author{ Eric Kort <eric.kort@vai.org> }
 \examples{
-
-library(rtiff)
-tif <- readTiff(paste(.path.package("rtiff"), "/tiff/jello.tif", sep=""))
+tif <- readTiff(system.file("tiff", "jello.tif", package="rtiff"))
 threshold <- autoThreshold(tif@red)
 plot(tif)
-
-getOption("device")()
-
 plot(tif@red > threshold[3])
 }
 \keyword{ utilities }
