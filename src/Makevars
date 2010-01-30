@@ -1,1 +1,0 @@
-PKG_LIBS=-ltiff -llzma -ljpeg -lz

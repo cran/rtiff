@@ -140,7 +140,7 @@ SEXP getTiffDescription(SEXP fn)
 void writeTiff(SEXP mr, SEXP mg, SEXP mb, SEXP fn)
 {
     TIFF *output;
-    char *raster;
+    unsigned char *raster;
     int x, y;
     int h = INTEGER(GET_DIM(mr))[0];
     int w = INTEGER(GET_DIM(mr))[1];
@@ -161,9 +161,9 @@ void writeTiff(SEXP mr, SEXP mg, SEXP mb, SEXP fn)
 	for (y=0; y<h; y++)
 	{
 	    int index = 3 * (y * w + x);
-	    raster[index] = (char)(255.0 * r[y + x*h]);
-	    raster[index + 1] = (char)(255.0 * g[y + x*h]);
-	    raster[index + 2] = (char)(255.0 * b[y + x*h]);
+	    raster[index] = (unsigned char)(255.0 * r[y + x*h]);
+	    raster[index + 1] = (unsigned char)(255.0 * g[y + x*h]);
+	    raster[index + 2] = (unsigned char)(255.0 * b[y + x*h]);
 	}
     }
 

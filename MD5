@@ -1,4 +1,4 @@
-066491fe66891b439bfd161011a77d7a *DESCRIPTION
+15f130727c1f8f3148a426063ac50234 *DESCRIPTION
 99cf42fffc53d0dbfefd8bc8f8728ea8 *LICENSE
 a2f48e7f2b2bfee57e5d65ace0bf8c32 *NAMESPACE
 9f3549f70c8df34ba0ec2893ca1215ca *R/autoThreshold.R
@@ -21,7 +21,6 @@ b33326eedd1914f2a92bbbc31d954596 *man/autoThreshold.Rd
 a9929e74a735ef0b5e0679e609211383 *man/rtiff.package.Rd
 e2a8fbb665253da2e778c7e64cb8d340 *man/updateDescription.Rd
 e82e788210b4c0e06e98e83ffd530aae *man/writeTiff.Rd
-82e30c795657033c9071295d05694ad7 *src/Makevars
 226cb8d694b6dd8fafeb3d5c3fc616fc *src/Makevars.in
 5be412c81811c1db36131b5255f4729e *src/Makevars.win
-e3ed5f65750cf91db71cf3bff5e083ff *src/rtiff.c
+2ff0ea631e887433a1ae02d9ac239212 *src/rtiff.c
