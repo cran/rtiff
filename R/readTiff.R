@@ -1,5 +1,5 @@
 "readTiff" <-
-function(fn, page=0, reduce=0) {
+function(fn, page=0, reduce=0, pixmap=TRUE) {
   w <- integer(1)
   h <- integer(1)
 
@@ -39,8 +39,12 @@ function(fn, page=0, reduce=0) {
       rm(rg)
       rm(rb)
 
-      pmap <- pixmapRGB(data=array(data = c(r, g, b), dim = c(nh, nw, 3)), nrow=nh, ncol=nw,
-         bbox=NULL, bbcent=FALSE, cellres=NULL)
+      if(pixmap) {
+            pmap <- pixmapRGB(data=array(data = c(r, g, b), dim = c(nh, nw, 3)), nrow=nh, ncol=nw,
+      	       bbox=NULL, bbcent=FALSE, cellres=c(1,1))
+      } else {
+            pmap <- list(r = r, g=g, b=b)
+      }
       rm(r)
       rm(g)
       rm(b)

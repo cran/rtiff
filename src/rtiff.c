@@ -112,7 +112,6 @@ void TiffReadTIFFRGBA (char** filename, int* dir, int* r, int* g, int* b)
 		g[i] = (int)TIFFGetG(buf[i]);
 		b[i] = (int)TIFFGetB(buf[i]);
 	    }                
-//	    fflush(stdout); /* what is this for? */
 	}
     } else
 	error("Error allocating memory in TIFFmalloc");  

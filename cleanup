@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rm -f config.* src/Makevars src/*.so src/*.o src/symbols*

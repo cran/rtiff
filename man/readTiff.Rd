@@ -5,15 +5,18 @@
   Loads a TIFF image from a file and returns the image as a pixmap object, with optional scaling.
 }
 \usage{
-readTiff(fn, page = 0, reduce = 0)
+readTiff(fn, page = 0, reduce = 0, pixmap = TRUE)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{fn}{ Filename (the tiff image to load) }
   \item{page}{ In the case of multi-page tiffs, which page do you want? }
   \item{reduce}{ Optional scaling factor to improve performance with large images, 
                  should be a value between 0 and 1 (i.e. a decimal representation of 
                  a percentage).  See details. }
+  \item{pixmap}{ By default, readTiff returns a pixmap object, ideal for plotting.  However pixmap 
+                 rescales the values to [0..1].  If you want the raw values from the file, set 
+                 pixmap=FALSE to get a list of r, g, and b values, unscaled. }
 }
 \details{
 
@@ -34,7 +37,8 @@ applications.
 For simplicity, an RGB pixmap is generated regardless of the colorspace of the original image (including
 grayscale images, in which case the R, G, and B rasters are identical).  The pixmap object requires 
 pixel intensities to be between 0 and 1, so the intensities in the orginal image file are scaled 
-accordingly.
+accordingly.  Alternatively, specify pixmap=FALSE to return a list of unscale r, g, and b values instead of a 
+pixmap object.
 
 }
 \value{
