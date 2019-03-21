@@ -219,3 +219,25 @@ void updateTTag (SEXP fn, SEXP desc)
 #endif
 }
 
+
+static const R_CMethodDef CEntries[] = {
+  {"C_reduce",           (DL_FUNC) &reduce,           5},
+  {"C_TiffGetHeight",    (DL_FUNC) &TiffGetHeight,    2},
+  {"C_TiffGetWidth",     (DL_FUNC) &TiffGetWidth,     2},
+  {"C_TiffReadTIFFRGBA", (DL_FUNC) &TiffReadTIFFRGBA, 5},
+  {NULL, NULL, 0}
+};
+
+static const R_CallMethodDef CallEntries[] = {
+  {"C_getTiffDescription", (DL_FUNC) &getTiffDescription, 1},
+  {"C_updateTTag",         (DL_FUNC) &updateTTag,         2},
+  {"C_writeTiff",          (DL_FUNC) &writeTiff,          4},
+  {NULL, NULL, 0}
+};
+
+void R_init_rtiff(DllInfo *dll)
+{
+  R_registerRoutines(dll, CEntries, CallEntries, NULL, NULL);
+  R_useDynamicSymbols(dll, FALSE);
+}
+

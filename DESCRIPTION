@@ -1,8 +1,8 @@
 Package: rtiff
 Type: Package
 Title: Read and Write TIFF Files
-Version: 1.4.5
-Date: 2015-07-15
+Version: 1.4.6
+Date: 2019-03-20
 Depends: pixmap
 Author: Eric Kort <eric.kort@vai.org>
 Maintainer: Eric Kort <eric.kort@vai.org>
@@ -18,9 +18,10 @@ Description: Reads and writes TIFF format images and
         highlevel TIFFReadRGBAImage function, this package inherently
         supports a wide range of image formats and compression schemes.
         This package also provides an implementation of the Ridler
-        Autothresholding algorithm for easy generation of binary masks.
+        Autothresholding algorithm for easy generation of binary masks as
+        described in Ridler & Calvard (1978) <doi:10.1109/TSMC.1978.4310039>.
 License: GPL-3
-Packaged: 2015-07-16 04:40:16 UTC; root
+Packaged: 2019-03-21 15:45:20 UTC; erikor
 Repository: CRAN
-Date/Publication: 2015-07-16 14:38:53
+Date/Publication: 2019-03-21 17:10:23 UTC
 NeedsCompilation: yes

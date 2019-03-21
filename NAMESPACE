@@ -1,4 +1,4 @@
-useDynLib("rtiff")
+useDynLib("rtiff", .registration = TRUE, .fixes = "C_")
 
 import(pixmap)
 

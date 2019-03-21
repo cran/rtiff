@@ -1,10 +1,10 @@
 "writeTiff" <-
 function(pixmap, fn) {
       if(class(pixmap) == "pixmapRGB"){
-        .Call("writeTiff", pixmap@red, pixmap@green, pixmap@blue, fn, PACKAGE="rtiff")
+        .Call("C_writeTiff", pixmap@red, pixmap@green, pixmap@blue, fn)
       } else if(class(pixmap) == "matrix") {
         pixmap = newPixmapRGB(pixmap, pixmap, pixmap);
-        .Call("writeTiff", pixmap@red, pixmap@green, pixmap@blue, fn, PACKAGE="rtiff")
+        .Call("C_writeTiff", pixmap@red, pixmap@green, pixmap@blue, fn)
       } else {
         stop(paste("writeTiff expects a pixmapRGB or matrix, got ", class(pixmap)))
       }

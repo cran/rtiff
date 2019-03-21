@@ -28,7 +28,7 @@ License: \tab GPL\cr
 A tiff image can be loaded using readTiff, and then plotted, or processed.  Regardless of the 
 colorspace of the original image, this function returns an RGB pixmap.  The image rasters 
 can be accessed through the red, green, and blue slots of the pixmap object returned.  These
-rasters may be further processed using any of the widely described image analysis alorithms.
+rasters may be further processed using any of the widely described image analysis algorithms.
 As a first step, and autoThreshold function is provided by this package to create binary 
 masks of pixmap channels of interest.
 

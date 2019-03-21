@@ -1,5 +1,5 @@
 "updateDescription" <-
 function(fn, description) {
-    .Call("updateTTag", fn, description, PACKAGE="rtiff")
+    .Call("C_updateTTag", fn, description, PACKAGE="rtiff")
     return()
 }
