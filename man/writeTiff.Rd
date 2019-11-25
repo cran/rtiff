@@ -16,7 +16,7 @@ writeTiff(pixmap, fn)
 }
 \details{
 
-This function saves the given pixmap or matrix raster as an unencrypted TIFF image, utilizing libtiff's 
+This function saves the given pixmap or matrix raster as an unencrypted TIFF image, utilizing libtiff's
 TIFFWriteEncodedStrip, with the entire raster in a single strip (for simplicity).
 
 }
@@ -30,6 +30,8 @@ TIFFWriteEncodedStrip, with the entire raster in a single strip (for simplicity)
 \examples{
 tif <- readTiff(system.file("tiff", "jello.tif", package="rtiff"))
 writeTiff(tif@red, "atesttif.tif")
+# clean up afterourselves
+unlink("atesttif.tif")
 }
 
 \keyword{ utilities }
