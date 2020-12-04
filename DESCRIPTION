@@ -1,8 +1,8 @@
 Package: rtiff
 Type: Package
 Title: Read and Write TIFF Files
-Version: 1.4.7
-Date: 2019-11-21
+Version: 1.4.8
+Date: 2020-12-04
 Depends: pixmap
 Author: Eric Kort <eric.kort@vai.org>
 Maintainer: Eric Kort <eric.kort@vai.org>
@@ -21,7 +21,7 @@ Description: Reads and writes TIFF format images and
         Autothresholding algorithm for easy generation of binary masks as
         described in Ridler & Calvard (1978) <doi:10.1109/TSMC.1978.4310039>.
 License: GPL-3
-Packaged: 2019-11-25 20:21:39 UTC; Eric.Kort
+Packaged: 2020-12-04 18:22:12 UTC; Eric.Kort
 Repository: CRAN
-Date/Publication: 2019-11-25 20:40:02 UTC
+Date/Publication: 2020-12-04 18:50:02 UTC
 NeedsCompilation: yes

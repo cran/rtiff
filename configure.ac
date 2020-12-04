@@ -1,3 +1,12 @@
+: ${R_HOME=`R RHOME`}
+if test -z "${R_HOME}"; then
+  echo "could not determine R_HOME"
+  exit 1
+fi
+CC=`"${R_HOME}/bin/R" CMD config CC`
+CFLAGS=`"${R_HOME}/bin/R" CMD config CFLAGS`
+CPPFLAGS=`"${R_HOME}/bin/R" CMD config CPPFLAGS`
+
 AC_PREREQ(2.1)
 AC_INIT([rtiff], [1.1], [eric.kort@vai.org])
 AC_CONFIG_SRCDIR([src/rtiff.c])
@@ -25,4 +34,3 @@ fi
 
 AC_SUBST(PKG_LIBS)
 AC_OUTPUT([src/Makevars])
-

@@ -17,7 +17,7 @@ function(fn, page=0, reduce=0, pixmap=TRUE) {
     bps <- integer(1);
     tiled <- integer(1);
 
-      tiff <- .C("C_TiffReadTIFFRGBA", as.character(fn), page=as.integer(page), r=as.integer(r), g=as.integer(g), b=as.integer(b), PACKAGE="rtiff");
+      tiff <- .C("C_TiffReadTIFFRGBA", as.character(fn), page=page, r=as.integer(r), g=as.integer(g), b=as.integer(b), PACKAGE="rtiff");
       if(reduce < 1) {
         rr <- integer(nw * nh)
         rg <- integer(nw * nh)
@@ -31,7 +31,7 @@ function(fn, page=0, reduce=0, pixmap=TRUE) {
       g <- matrix(tiff$g, nrow=nh, ncol=nw, byrow=TRUE)
       b <- matrix(tiff$b, nrow=nh, ncol=nw, byrow=TRUE)
       rm(tiff);
-
+     
       rmx <- max(r)
       gmx <- max(g)
       bmx <- max(b)

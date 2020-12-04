@@ -4,7 +4,7 @@
 #include <Rdefines.h>
 #include <Rinternals.h>
 
-/*============================================================================
+/*============================================================================ 
  * tiffRead --
  *
  * Copyleft 2001 by Eric J. Kort/Van Andel Research Institute
@@ -15,7 +15,7 @@
  * Copyright (c) 1988-1997 Sam Leffler
  * Copyright (c) 1991-1997 Silicon Graphics, Inc.
  *
- * Permission to use, copy, modify, distribute, and sell this software and
+ * Permission to use, copy, modify, distribute, and sell this software and 
  * its documentation for any purpose is hereby granted without fee, provided
  * that (i) the above copyright notices and this permission notice appear in
  * all copies of the software and related documentation, and (ii) the names of
@@ -25,7 +25,7 @@
  *============================================================================
  */
 
-void TiffGetHeight (char** filename, int* h)
+void TiffGetHeight (char** filename, int* h) 
 {
     TIFF* tif;
 
@@ -51,7 +51,7 @@ void TiffGetWidth (char** filename, int* w)
 	*w = -1;
 	return;
     }
-    TIFFGetField(tif, TIFFTAG_IMAGEWIDTH, w);
+    TIFFGetField(tif, TIFFTAG_IMAGEWIDTH, w);    
     TIFFClose(tif);
     return;
 }
@@ -66,7 +66,7 @@ void TiffIsTiled(char **filename, int* yn)
     return;
 }
 
-void TiffGetImageType (char** filename, int *dir, int* spp, int* pm, int* bps, int* tiled)
+void TiffGetImageType (char** filename, int *dir, int* spp, int* pm, int* bps, int* tiled) 
 {
     TIFF* tif;
 
@@ -78,7 +78,7 @@ void TiffGetImageType (char** filename, int *dir, int* spp, int* pm, int* bps, i
     }
 
     TIFFGetField(tif, TIFFTAG_PHOTOMETRIC, pm);
-    TIFFGetField(tif, TIFFTAG_SAMPLESPERPIXEL, spp);
+    TIFFGetField(tif, TIFFTAG_SAMPLESPERPIXEL, spp);        
     TIFFGetField(tif, TIFFTAG_BITSPERSAMPLE, bps);
     *tiled = TIFFIsTiled(tif);
     TIFFClose(tif);
@@ -111,10 +111,10 @@ void TiffReadTIFFRGBA (char** filename, int* dir, int* r, int* g, int* b)
 		r[i] = (int)TIFFGetR(buf[i]);
 		g[i] = (int)TIFFGetG(buf[i]);
 		b[i] = (int)TIFFGetB(buf[i]);
-	    }
+	    }                
 	}
     } else
-	error("Error allocating memory in TIFFmalloc");
+	error("Error allocating memory in TIFFmalloc");  
     TIFFClose(tif);
     _TIFFfree(buf);
 }
@@ -136,7 +136,7 @@ SEXP getTiffDescription(SEXP fn)
     return ans;
 }
 
-SEXP writeTiff(SEXP mr, SEXP mg, SEXP mb, SEXP fn)
+void writeTiff(SEXP mr, SEXP mg, SEXP mb, SEXP fn)
 {
     TIFF *output;
     unsigned char *raster;
@@ -147,7 +147,6 @@ SEXP writeTiff(SEXP mr, SEXP mg, SEXP mb, SEXP fn)
     double *g = REAL(mg);
     double *b = REAL(mb);
     const char* filename = CHAR(STRING_ELT(fn, 0));
-    SEXP rv = R_NilValue;
 
     // Open the output image
     if((output = TIFFOpen(filename, "w")) == NULL)
@@ -182,10 +181,9 @@ SEXP writeTiff(SEXP mr, SEXP mg, SEXP mb, SEXP fn)
 
     TIFFClose(output);
     free(raster);
-    return(rv);
 }
 
-void reduce(int* r, int* nr, int* w, int* h, double* p)
+void reduce(int* r, int* nr, int* w, int* h, double* p) 
 {
     int nw, nh, x, y, i;
     nw = ceil((1-*p) * *w);
@@ -199,27 +197,26 @@ void reduce(int* r, int* nr, int* w, int* h, double* p)
 }
 
 
-SEXP updateTTag (SEXP fn, SEXP desc)
+void updateTTag (SEXP fn, SEXP desc)
 {
-    TIFF *tiff;
-    SEXP rv = R_NilValue;
-
-    const char* filename = CHAR(STRING_ELT(fn, 0)) ;
-    const char* description = CHAR(STRING_ELT(desc, 0)) ;
-    if((tiff = TIFFOpen(filename , "r+")) == NULL)
-    	error("Could not open image file '%s'", filename);
 #if TIFF_VERSION_CLASSIC >= 40
-    const TIFFField *fip;
+    error("Interface changed in libtiff 4, so no longer implemented");
 #else
+    TIFF *tiff;
+    const char* filename = CHAR(STRING_ELT(fn, 0)) ;
+    const char* description = CHAR(STRING_ELT(desc, 0)) ;	
+    if((tiff = TIFFOpen(filename , "r+")) == NULL)
+	error("Could not open image file '%s'", filename);
     const TIFFFieldInfo *fip;
-#endif
     fip = TIFFFieldWithTag(tiff, 270);
     if (!fip) error("Could not get field information");
-    if (TIFFSetField(tiff, TIFFTAG_IMAGEDESCRIPTION, description) != 1)
-        error("Failed to set field.");
+    if (fip->field_type == TIFF_ASCII) {
+        if (TIFFSetField(tiff, fip->field_tag, description) != 1)
+            error("Failed to set field.");
+    } else error("Description field is not ascii");
     TIFFRewriteDirectory(tiff);
     TIFFClose(tiff);
-    return(rv);
+#endif
 }
 
 
